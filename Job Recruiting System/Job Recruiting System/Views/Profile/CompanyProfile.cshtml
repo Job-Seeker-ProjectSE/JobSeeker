@@ -1,0 +1,78 @@
+﻿@{
+
+    ViewData["Title"] = "Manage Profile";
+}
+
+<div class="container" style="max-width: 900px;">
+    <h2 class="mb-4">Company Profile</h2>
+
+    <form method="post" asp-action="UpdateCompany" enctype="multipart/form-data">
+        <div class="row">
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Company Logo</label>
+                <input type="file" class="form-control" name="CompanyLogo" accept="image/*" />
+                
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Upload Company Document</label>
+                <input type="file" class="form-control" name="CompanyDocument" accept=".pdf,.doc,.docx" />
+                <small class="text-muted">Document will be stored permanently.</small>
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Company Name</label>
+                <input class="form-control" name="CompanyName" value="@ViewBag.CompanyName" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Field / Industry</label>
+                <input class="form-control" name="Field" placeholder="e.g., IT, Finance, Marketing" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Contact Email</label>
+                <input class="form-control" name="Email" placeholder="company@email.com" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number</label>
+                <input class="form-control" name="Phone" placeholder="+355..." />
+            </div>
+
+            
+            <div class="col-12 mb-3">
+                <label class="form-label">Address</label>
+                <input class="form-control" name="Address" placeholder="City, Street, ZIP" />
+            </div>
+
+            
+            <div class="col-12 mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="Description" rows="4"
+                          placeholder="Tell others about your company, services, and values..."></textarea>
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Website</label>
+                <input class="form-control" name="Website" placeholder="https://example.com" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">LinkedIn / Social Media</label>
+                <input class="form-control" name="LinkedIn" placeholder="LinkedIn profile or social media link" />
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary mt-3">Save Profile</button>
+    </form>
+</div>

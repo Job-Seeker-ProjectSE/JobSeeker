@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Manage Profile";
+}
+
+<div class="container" style="max-width: 900px;">
+    <h2 class="mb-4">Client Profile</h2>
+
+    <form method="post" asp-action="UpdateClient" enctype="multipart/form-data">
+        <div class="row">
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Profile Photo (temporary)</label>
+                <input type="file" class="form-control"
+                       name="ProfilePhoto" accept="image/*" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Upload CV (temporary)</label>
+                <input type="file" class="form-control"
+                       name="CV" accept=".pdf,.doc,.docx" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Full Name</label>
+                <input class="form-control"
+                       name="FullName" value="@ViewBag.FullName" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Age</label>
+                <input class="form-control"
+                       type="number"
+                       name="Age" value="@ViewBag.Age" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Skills</label>
+                <input class="form-control"
+                       name="Skills"
+                       placeholder="C#, SQL, JavaScript" />
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Availability</label>
+                <select class="form-select" name="Availability">
+                    <option>Full-time</option>
+                    <option>Part-time</option>
+                    <option>Remote</option>
+                    <option>Internship</option>
+                    <option>Freelance</option>
+                </select>
+            </div>
+
+           
+            <div class="col-12 mb-3">
+                <label class="form-label">Education</label>
+                <input class="form-control"
+                       name="Education"
+                       placeholder="University / Degree" />
+            </div>
+
+            
+            <div class="col-12 mb-3">
+                <label class="form-label">Work Experience</label>
+                <textarea class="form-control"
+                          name="Experience"
+                          rows="3"></textarea>
+            </div>
+
+            
+            <div class="col-12 mb-3">
+                <label class="form-label">About Me</label>
+                <textarea class="form-control"
+                          name="About"
+                          rows="4"></textarea>
+            </div>
+
+            
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number</label>
+                <input class="form-control"
+                       name="Phone" placeholder="+355..." />
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary mt-3">
+            Save Profile
+        </button>
+    </form>
+</div>
