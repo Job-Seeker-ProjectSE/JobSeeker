@@ -1,0 +1,73 @@
+﻿@model Job_Recruiting_System.Models.Job
+
+@{
+    ViewData["Title"] = "Post a Job";
+}
+<style>
+    .label {
+        font-size:1.5rem;
+        font-weight:bold;
+        margin:0px 0px 5px 0px;
+    }
+    .container_postjob{
+        width:100%;
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+    }
+    .postjob_form {
+        background:rgb(250,250,250);
+        width:500px;
+        box-shadow:0px 0px 5px gray;
+        border-radius:20px;
+        padding:20px;
+    }
+    .postjob_button{
+        width:80%;
+        font-size:1.5rem;
+        font-weight:bold;
+        margin:8px 0px 0px 0px;
+    }
+    .postjob_input:hover{
+        cursor:pointer;
+        width:85%;
+        font-size:1.6rem;
+        transition:200ms ease-in-out;
+    }
+</style>
+<div class="container_postjob">
+    <div class="postjob_form">
+        <div style="width:100%;text-align:center;"><h1>Post a Job</h1></div>
+
+<form asp-action="PostJob" method="post">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label label"></label>
+        <input asp-for="Title" class="form-control" placeholder="Please insert Job Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+                <label asp-for="Company" class="control-label label"></label>
+                <input asp-for="Company" class="form-control" placeholder="Job Company" />
+        <span asp-validation-for="Company" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+                <label asp-for="Location" class="control-label label"></label>
+                <input asp-for="Location" class="form-control" placeholder="Where are you Located" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+                <label asp-for="Description" class="control-label label"></label>
+                <textarea asp-for="Description" rows="5" class="form-control" placeholder="Descripe Hours, Salary and simple directions."></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+            <div style="width:100%;display:flex;align-items:center;justify-content:center;margin-bottom:15px;">
+				<button type="submit" class="btn btn-primary postjob_button">Submit</button>
+    </div>
+</form>
+    </div>
+</div>

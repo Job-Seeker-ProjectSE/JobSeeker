@@ -1,0 +1,60 @@
+﻿@model Job_Recruiting_System.Models.Job
+
+@{
+    ViewData["Title"] = "Policy";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        color: #333;
+    }
+</style>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Job Seeker</a>
+
+           
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Back Home</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="@Url.Action("Policy", "Jobs")">Site Policy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h1>Site Policy</h1>
+    <p>Welcome to our platform! We publish job-related notes to help people find employment opportunities and assist businesses in hiring suitable candidates.</p>
+    <h2>Usage Policy</h2>
+    <p>- All job listings must be accurate and lawful.</p>
+    <p>- Users must not post misleading job information.</p>
+    <p>- The platform is not responsible for job offers or hiring decisions.</p>
+    <h2>Privacy Policy</h2>
+    <p>- We respect user privacy and do not share personal information without consent.</p>
+    <p>- Any data collected is solely for improving our services.</p>
+    <h2>Contact Us</h2>
+    <p>For inquiries, please contact us at <a>jobseeker@support.com</a>.</p>
+</div>

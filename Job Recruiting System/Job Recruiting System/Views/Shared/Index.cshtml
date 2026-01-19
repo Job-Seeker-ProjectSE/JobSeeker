@@ -1,0 +1,215 @@
+﻿@* https://localhost:7152/Jobs *@
+@model IEnumerable<Job_Recruiting_System.Models.Job>
+<style>
+    .job_card{
+        margin-bottom:15px;
+    }
+    .job_title{
+        color:black;
+        font-size:2rem;
+        font-style:bold;
+        text-shadow:0px 0px 1px black;
+    }
+    .job_p {
+        color:black;
+        font-size:1rem;
+    }
+    .job_time{
+        color:gray;
+        opacity:0.9;
+        margin-right:20px;
+    }
+    .job_button {
+        padding:5px !important;
+        font-size:1.5rem !important;
+        background-color:green;
+        width:150px;
+        text-align:center;
+    }
+    .job_button:hover{
+        cursor:pointer;
+        background:green !important;
+        box-shadow:0px 0px 5px green;
+        transition:200ms ease-in-out;
+    }
+    .job_remove {
+        position:absolute;
+        top:8px;
+        right:8px;
+        background:rgb(250,250,250);
+        width:30px;
+        height:30px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-weight:bold;
+        border-radius:50%;
+        font-size:1.5rem;
+        transform:rotate(45deg);
+        margin:0;
+        padding:0;
+        color:black;
+        outline:none;
+        border:none;
+        box-shadow:0px 0px 2px rgb(250,250,250);
+
+    }
+    .job_remove:hover{
+        cursor:pointer;
+        background:rgb(240,240,240);
+        box-shadow: 0px 0px 2px rgb(240,240,240);
+        transition:200ms ease-in-out;
+        color:black !important;
+        font-weight:bold;
+        text-shadow:0px 0px 2px black;
+    }
+</style>
+
+@if (ViewBag.ShowApplyNotification == true
+  && Context.Session.GetString("UserRole") == "Company")
+{
+    <div id="applyNotification" style="
+        position: fixed;
+        top: 90px;
+        right: 20px;
+        background: #111;
+        color: white;
+        padding: 16px;
+        border-radius: 10px;
+        z-index: 9999;
+        width: 300px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.5);
+            ">
+
+        
+        <span id="closeNotification" style="
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            ">&times;</span>
+
+        <strong>🔔 New Application</strong>
+        <hr style="border-color:gray;" />
+
+        <p><b>Name:</b> @ViewBag.ApplicantName</p>
+        <p><b>Field:</b> @ViewBag.ApplicantField</p>
+        <p><b>CV:</b></p>
+        <p style="font-size:0.9rem;opacity:0.9;">
+            @ViewBag.ApplicantCV
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            var closeBtn = document.getElementById("closeNotification");
+            var notification = document.getElementById("applyNotification");
+
+            if (closeBtn && notification) {
+                closeBtn.addEventListener("click", function () {
+                    notification.style.display = "none";
+                });
+            }
+        });
+    </script>
+}
+
+
+
+ <header> 
+         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3"> 
+       <div class="container-fluid"> 
+            
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Job Seeker</a> 
+
+         
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"></span> 
+            </button> 
+
+          
+            <div class="collapse navbar-collapse" id="navbarNav"> 
+                <ul class="navbar-nav ms-auto"> 
+                  <li class="nav-item"> 
+                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Back Home</a> 
+                     </li> 
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="@Url.Action("Policy", "Jobs")">Site Policy</a>
+                    </li>
+                    @if (Context.Session.GetString("UserRole") == "Company")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Jobs" asp-action="PostJob">
+                                Post Job
+                            </a>
+                        </li>
+                    }
+                   
+                    
+                        @if (Context.Session.GetString("UserEmail") == null)
+                        {
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Account" asp-action="Login">
+                                Sign In
+                            </a>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Profile" asp-action="Index">
+                                    @Context.Session.GetString("UserEmail")
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Account" asp-action="Logout">
+                                Logout
+                            </a>
+                        </li>
+                        }
+                    
+
+
+                </ul> 
+             </div> 
+        </div> 
+     </nav>
+ </header> 
+<div class="container mt-4">
+    <h1>Job Listings</h1>
+    
+    <form method="get" class="d-flex mb-3">
+        <input type="text" name="title" placeholder="Job Title" class="form-control me-2" />
+        <input type="text" name="location" placeholder="Location" class="form-control me-2" />
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+    
+    <ul class="list-group">
+        @foreach (var job in Model)
+        {
+            <li class="job_card list-group-item" style="position:relative;">
+                <h4 class="job_title">@job.Title</h4>
+                <p class="job_p">@job.Company - @job.Location</p>
+                <p class="job_p">@job.Description</p>
+                <small class="job_time">Last Updated: @job.UpdatedAt.ToShortDateString()</small>
+                <a href="@Url.Action("Details", "Jobs", new { id = job.Id })" class="job_button btn btn-secondary btn-sm mt-2">View Details</a>
+                <form method="post" action="@Url.Action("Delete", "Jobs")" style="display:inline;">
+                    <input type="hidden" name="id" value="@job.Id" />
+                    <button type="submit" class="btn btn-danger btn-sm mt-2 job_remove">+</button>
+                </form>
+            </li>
+        }
+    </ul>
+</div>
+
